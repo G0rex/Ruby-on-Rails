@@ -1,7 +1,11 @@
 <% if notice %>
 <p id="notice"><%= notice %></p>
 <% end %>
-
+<%if session[:counter]>5%>
+<p id="notice">
+Счетчик вхождения в store/index : 
+ <%= session[:counter]%></p>
+ <%end%>
 <h1><%= t('.title_html') %></h1>
 
 <% cache ['store', Product.latest] do %>
@@ -16,7 +20,9 @@
           <%= button_to t('.add_html'), line_items_path(product_id: product),
             remote: true %>
         </div>
+       
       </div>
     <% end %>
   <% end %>
+
 <% end %>

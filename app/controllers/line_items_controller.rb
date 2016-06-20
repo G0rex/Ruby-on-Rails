@@ -37,6 +37,7 @@ class LineItemsController < ApplicationController
   def create
     product = Product.find(params[:product_id])
     @line_item = @cart.add_product(product.id)
+    session[:counter]=0
     #binding.pry
     respond_to do |format|
       if @line_item.save
