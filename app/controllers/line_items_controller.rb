@@ -37,7 +37,10 @@ class LineItemsController < ApplicationController
   def create
     product = Product.find(params[:product_id])
     @line_item = @cart.add_product(product.id)
-    session[:counter]=0
+
+    #@line_item.price=product.price
+    session[:counter]=0;
+   
     #binding.pry
     respond_to do |format|
       if @line_item.save
@@ -50,7 +53,9 @@ class LineItemsController < ApplicationController
         format.json { render json: @line_item.errors,
           status: :unprocessable_entity }
       end
+
     end
+    
   end
 
   # PATCH/PUT /line_items/1
@@ -72,7 +77,7 @@ class LineItemsController < ApplicationController
   def destroy
     @line_item.destroy
     respond_to do |format|
-      format.html { redirect_to line_items_url, notice: 'Line item was successfully destroyed.' }
+      format.html { redirect_to store_url, notice: 'Line item was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
