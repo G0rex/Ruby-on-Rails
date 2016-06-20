@@ -75,11 +75,13 @@ class LineItemsController < ApplicationController
   # DELETE /line_items/1
   # DELETE /line_items/1.json
   def destroy
+    @cart=session[:cart_id]
     #binding.pry
     if(@line_item.quantity == 1)
       @line_item.destroy
     respond_to do |format|
-      format.html { redirect_to store_url, notice: 'Line item was successfully destroyed.' }
+      format.html { redirect_to store_url }
+      format.js {@cart = Cart.find(session[:cart_id])}
       format.json { head :no_content }
     end
     else
@@ -87,6 +89,7 @@ class LineItemsController < ApplicationController
     @line_item.save
     respond_to do |format|
       format.html { redirect_to store_url }
+      format.js { @cart = Cart.find(session[:cart_id]) }
       format.json { head :no_content }
     end
     end
