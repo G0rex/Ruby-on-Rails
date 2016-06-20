@@ -1,0 +1,4 @@
+$('#notice').hide();
+if ($('#cart tr').length < 1000) { $('#cart').hide('blind', 1000); }
+$('#cart').html("<%= escape_javascript render(@cart) %>");
+
